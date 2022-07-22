@@ -161,7 +161,11 @@ const GameScreen: React.FC<any> = ({ route }) => {
                 ? "YOU LOSE! 🙇‍♂️"
                 : "DRAW!"}
             </Text>
-            <TouchableOpacity onPress={resetGame} style={styles.tryAgainButton}>
+            <TouchableOpacity
+              accessibilityRole="button"
+              onPress={resetGame}
+              style={styles.tryAgainButton}
+            >
               <Text style={styles.tryAgainButtonText}>Try Again</Text>
             </TouchableOpacity>
           </View>

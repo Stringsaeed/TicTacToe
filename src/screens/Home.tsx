@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     borderRadius: 8,
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: "rgba(0, 0, 0, 0.08)",
+    borderColor: Palette.border,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: Palette.card,
@@ -50,21 +50,29 @@ const HomeScreen: React.FC<any> = ({ navigation }) => {
     (side: "x" | "o") => () => {
       navigation.navigate("Game", { side });
     },
-    []
+    [navigation]
   );
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Please Select Side:</Text>
       <View style={styles.row}>
-        <TouchableOpacity style={styles.card} onPress={navigateToGame("o")}>
+        <TouchableOpacity
+          accessibilityRole="button"
+          style={styles.card}
+          onPress={navigateToGame("o")}
+        >
           <MemoCircleIcon
             width={ICON_SIZE}
             height={ICON_SIZE}
             pathFill={Palette.content}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.card} onPress={navigateToGame("x")}>
+        <TouchableOpacity
+          accessibilityRole="button"
+          style={styles.card}
+          onPress={navigateToGame("x")}
+        >
           <MemoCrossIcon
             width={ICON_SIZE}
             height={ICON_SIZE}

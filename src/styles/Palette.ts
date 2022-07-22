@@ -5,6 +5,7 @@ const Palette = {
   white: "#FFFFFF",
   black: "#000000",
   transparent: "transparent",
+  border: "rgba(0, 0, 0, 0.08)",
 };
 
 export default Palette;
