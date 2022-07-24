@@ -1,11 +1,11 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import HomeScreen from "../screens/Home";
-import GameScreen from "../screens/Game";
+
+import { HomeScreen, GameScreen } from "@screens";
 
 const { Navigator, Screen } = createStackNavigator();
 
-const AppStack: React.FC = () => {
+const RootNavigator: React.VFC = () => {
   return (
     <Navigator screenOptions={{ headerShown: false }}>
       <Screen name="Home" component={HomeScreen} />
@@ -14,4 +14,4 @@ const AppStack: React.FC = () => {
   );
 };
 
-export default AppStack;
+export default RootNavigator;

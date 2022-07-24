@@ -1,9 +1,9 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
-import AppStack from "./App";
+import AppStack from "./Root";
 
-const AppNavigation: React.FC = () => {
+const AppNavigation: React.VFC = () => {
   return (
     <NavigationContainer>
       <AppStack />

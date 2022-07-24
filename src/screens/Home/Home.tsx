@@ -1,49 +1,11 @@
 import React from "react";
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
-import MemoCircleIcon from "../assets/Circle";
-import MemoCrossIcon from "../assets/Cross";
-import { Palette } from "../styles";
+import { View, TouchableOpacity, Text } from "react-native";
 
-const { width } = Dimensions.get("window");
-const CARD_WIDTH = (width - (48 + 16)) / 2;
-const ICON_SIZE = CARD_WIDTH / 2;
+import { Palette } from "@styles";
+import MemoCrossIcon from "@assets/Cross";
+import MemoCircleIcon from "@assets/Circle";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    paddingHorizontal: 24,
-    backgroundColor: Palette.background,
-  },
-  card: {
-    width: CARD_WIDTH,
-    aspectRatio: 1,
-    borderRadius: 8,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: Palette.border,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: Palette.card,
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: Palette.content,
-    textAlign: "center",
-    marginBottom: 24,
-  },
-});
+import styles, { ICON_SIZE } from "./styles";
 
 const HomeScreen: React.FC<any> = ({ navigation }) => {
   const navigateToGame = React.useCallback(

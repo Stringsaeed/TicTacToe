@@ -1,60 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 // @ts-ignore
 import TicTacToe from "tictactoe-agent";
 
-import CellItem from "../components/CellItem";
-import { BOARD_WIDTH } from "../constants";
-import { Palette } from "../styles";
-import { BoardT, checkWin, PlayerT } from "../utils/game";
+import CellItem from "../../components/CellItem";
+import { BoardT, checkWin, PlayerT } from "../../utils/game";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Palette.background,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  board: {
-    backgroundColor: Palette.card,
-    width: BOARD_WIDTH,
-    aspectRatio: 1,
-    borderRadius: 8,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: Palette.white,
-    overflow: "hidden",
-  },
-  cellRows: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  announceWinner: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: Palette.black + "99",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 8,
-  },
-  announceWinnerText: {
-    fontSize: 32,
-    color: Palette.white,
-    textAlign: "center",
-  },
-  tryAgainButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 4,
-    backgroundColor: Palette.background,
-    marginTop: 16,
-  },
-  tryAgainButtonText: {
-    fontSize: 16,
-    color: Palette.black,
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-});
+import styles from "./styles";
+
+const BOARD_SIZE = 9;
 
 const GameScreen: React.FC<any> = ({ route }) => {
   const { side: humanPlayer } = React.useMemo(
@@ -66,15 +21,17 @@ const GameScreen: React.FC<any> = ({ route }) => {
     [humanPlayer]
   );
   const [disabledBoard, setDisabledBoard] = React.useState(false);
-  const [board, setBoard] = React.useState<BoardT>(new Array(9).fill(""));
+  const [board, setBoard] = React.useState<BoardT>(
+    new Array(BOARD_SIZE).fill("")
+  );
   const [computerTurn, setComputerTurn] = React.useState(false);
   const [winner, setWinner] = React.useState<PlayerT | "draw">();
 
   const insertInBoard = React.useCallback(
     (player: PlayerT, position: number) => {
       if (!board[position]) {
-        setBoard((board) => {
-          const newBoard = [...board];
+        setBoard((_board) => {
+          const newBoard = [..._board];
           newBoard[position] = player;
           return newBoard;
         });
@@ -118,15 +75,13 @@ const GameScreen: React.FC<any> = ({ route }) => {
 
   React.useEffect(() => {
     if (board.length > 5) {
-      setWinner(
-        checkWin(board, humanPlayer)
-          ? humanPlayer
-          : checkWin(board, computerPlayer)
-          ? computerPlayer
-          : board.every((cell) => !!cell)
-          ? "draw"
-          : undefined
-      );
+      if (checkWin(board, humanPlayer)) {
+        setWinner(humanPlayer);
+      } else if (checkWin(board, computerPlayer)) {
+        setWinner(computerPlayer);
+      } else if (board.every((cell) => !!cell)) {
+        setWinner("draw");
+      }
     }
   }, [board, computerPlayer, humanPlayer]);
 
